@@ -1,4 +1,4 @@
-<img width="225" height="225" alt="image" src="https://github.com/user-attachments/assets/02840465-bb04-495c-8441-1062b9d197b2" /># 🌍 A Comprehensive Measure of Well-Being (HDI Prediction System)
+# 🌍 A Comprehensive Measure of Well-Being (HDI Prediction System)
 
 ## 📌 Project Overview
 The Human Development Index (HDI) Prediction System is an intelligent, Machine Learning-backed web application developed to analyze and forecast the social and economic development tiers of global nations. The system assists researchers, policy analysts, and international organizations in making faster, data-driven developmental assessments by evaluating vital country-level indicators. The application integrates advanced predictive modeling techniques and exposes them through a responsive, glassmorphism-themed Flask web interface for real-time inference.
@@ -7,7 +7,9 @@ The Human Development Index (HDI) Prediction System is an intelligent, Machine L
 Traditional methods of compiling and assessing international development indices are heavily reliant on retrospective, lag-heavy manual data collection, making proactive policy evaluations slow and prone to delayed intervention. This project addresses the challenge by automating socio-economic tier assessments using optimized machine learning techniques, enabling financial and social institutions to improve efficiency and reduce global forecasting risks.
 
 ## ER Diagram
-![Uploading Gemini_Generated_Image_(entity relation ship).png…]()
+
+<img width="1408" height="711" alt="Gemini_Generated_Image_(entity relation ship)" src="https://github.com/user-attachments/assets/5556fc61-6e76-4000-b068-af004bcccacf" />
+
 
 
 ## 🚀 Key Features
