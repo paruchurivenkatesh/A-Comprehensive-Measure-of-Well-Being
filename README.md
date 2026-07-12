@@ -139,7 +139,7 @@ Through this engineering sprint, the following technical competencies were maste
 - ✔️ Interface Design utilizing advanced CSS variable configurations.
 
 ## 👨‍💻 Author
-- 👑 **Paruchuri Venkatesh** —
+- 👑 **Paruchuri Venkatesh**
   
 ## 📝 Conclusion
 The Human Development Index Prediction System demonstrates the practical application of Machine Learning within global economic sectors. By combining predictive analytics with an optimized web interface, the system helps institutions make faster, data-driven decisions while reducing operational risks.
