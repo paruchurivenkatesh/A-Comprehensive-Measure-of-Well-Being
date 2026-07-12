@@ -1,4 +1,4 @@
-# 🌍 A Comprehensive Measure of Well-Being (HDI Prediction System)
+<img width="225" height="225" alt="image" src="https://github.com/user-attachments/assets/02840465-bb04-495c-8441-1062b9d197b2" /># 🌍 A Comprehensive Measure of Well-Being (HDI Prediction System)
 
 ## 📌 Project Overview
 The Human Development Index (HDI) Prediction System is an intelligent, Machine Learning-backed web application developed to analyze and forecast the social and economic development tiers of global nations. The system assists researchers, policy analysts, and international organizations in making faster, data-driven developmental assessments by evaluating vital country-level indicators. The application integrates advanced predictive modeling techniques and exposes them through a responsive, glassmorphism-themed Flask web interface for real-time inference.
@@ -7,7 +7,8 @@ The Human Development Index (HDI) Prediction System is an intelligent, Machine L
 Traditional methods of compiling and assessing international development indices are heavily reliant on retrospective, lag-heavy manual data collection, making proactive policy evaluations slow and prone to delayed intervention. This project addresses the challenge by automating socio-economic tier assessments using optimized machine learning techniques, enabling financial and social institutions to improve efficiency and reduce global forecasting risks.
 
 ## ER Diagram
-*(Insert your ER Diagram image here)*
+![Uploading Gemini_Generated_Image_(entity relation ship).png…]()
+
 
 ## 🚀 Key Features
 Experience a full-fledged index evaluation platform with real-time functionality and a modern user experience:
@@ -135,12 +136,8 @@ Through this engineering sprint, the following technical competencies were maste
 - ✔️ Robust Flask Full-Stack Web Architecture Routing.
 - ✔️ Interface Design utilizing advanced CSS variable configurations.
 
-## 👥 Team Details
-- 👑 **Yamineeswari Karani** — Team Lead
-- 👤 **Srija Gudivaka** — Member
-- 👤 **Sravan Anand Karri** — Member
-- 👤 **Manaswini Sarva** — Member
-- 👤 **Sheik Raheema Raheema** — Member
-
+## 👨‍💻 Author
+- 👑 **Paruchuri Venkatesh** —
+  
 ## 📝 Conclusion
 The Human Development Index Prediction System demonstrates the practical application of Machine Learning within global economic sectors. By combining predictive analytics with an optimized web interface, the system helps institutions make faster, data-driven decisions while reducing operational risks.
