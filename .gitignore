@@ -1,0 +1,26 @@
+# Environments
+venv/
+env/
+.env
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Databases
+*.sqlite
+*.db
+
+# Logs
+logs/
+*.log
+
+# Models
+# models/best_model.pkl (keeping this out of ignore if they want it pushed, but usually we ignore large models. I'll leave it out of gitignore so it pushes the trained model for out-of-the-box working)
+
+# Data
+# dataset/raw/hdi_data.csv
+# dataset/processed/

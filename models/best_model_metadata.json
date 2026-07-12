@@ -1,0 +1,18 @@
+{
+    "algorithm_name": "Linear Regression",
+    "metrics": {
+        "mae": 0.020283700598148352,
+        "mse": 0.0006803879435456589,
+        "rmse": 0.02608424703811975,
+        "r2": 0.9703139274312239,
+        "adj_r2": 0.9676751654251105
+    },
+    "feature_columns": [
+        "Life Expectancy",
+        "Mean Years of Schooling",
+        "Expected Years of Schooling",
+        "Gross National Income Per Capita"
+    ],
+    "training_date": "2026-07-12T07:10:46.329190",
+    "version": "1.0"
+}

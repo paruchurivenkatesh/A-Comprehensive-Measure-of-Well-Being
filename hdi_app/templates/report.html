@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Report - HDI Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #fff; color: #333; }
+        .report-header { border-bottom: 2px solid #333; margin-bottom: 20px; padding-bottom: 10px; }
+        @media print {
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4 no-print">
+            <a href="{{ url_for('reports.history') }}" class="btn btn-outline-secondary">&larr; Back to History</a>
+            <div>
+                <button onclick="window.print()" class="btn btn-primary me-2">Print Report</button>
+                <a href="{{ url_for('reports.download_csv') }}" class="btn btn-success">Download CSV</a>
+            </div>
+        </div>
+
+        <div class="report-header text-center">
+            <h2>HDI Prediction Report</h2>
+            <p class="text-muted mb-0">Generated for: {{ current_user.username }} | Date: {{ now.strftime('%Y-%m-%d') }}</p>
+        </div>
+
+        {% if predictions %}
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>Country</th>
+                    <th>Life Exp.</th>
+                    <th>Mean Sch.</th>
+                    <th>Exp. Sch.</th>
+                    <th>GNI p.c.</th>
+                    <th>Predicted HDI</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in predictions %}
+                <tr>
+                    <td>{{ item.timestamp.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ item.country }}</td>
+                    <td>{{ item.life_expectancy }}</td>
+                    <td>{{ item.mean_years_schooling }}</td>
+                    <td>{{ item.expected_years_schooling }}</td>
+                    <td>${{ item.gni_per_capita }}</td>
+                    <td><strong>{{ "%.3f"|format(item.predicted_hdi) }}</strong></td>
+                    <td>{{ item.predicted_category }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-info text-center">No predictions to show in this report.</div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - HDI Predictor{% endblock %}
+{% block head %}
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+        <h2 class="fw-bold"><i class="fa-solid fa-gauge-high text-primary me-2"></i>Dashboard</h2>
+        <span class="text-muted">Welcome back, <strong>{{ current_user.username }}</strong></span>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card stat-card shadow-sm border-0 h-100 bg-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1 text-uppercase small fw-bold">Total Predictions</p>
+                            <h3 class="fw-bold mb-0">{{ total_predictions }}</h3>
+                        </div>
+                        <div class="stat-icon bg-primary text-white">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card shadow-sm border-0 h-100 bg-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1 text-uppercase small fw-bold">Average HDI Score</p>
+                            <h3 class="fw-bold mb-0 text-success">{{ avg_hdi }}</h3>
+                        </div>
+                        <div class="stat-icon bg-success text-white">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card stat-card shadow-sm border-0 h-100 bg-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <p class="text-muted mb-0 text-uppercase small fw-bold">Active ML Model</p>
+                        <span class="badge bg-info text-dark">Live</span>
+                    </div>
+                    {% if active_model %}
+                    <h5 class="fw-bold text-primary mb-1">{{ active_model.algorithm_name }}</h5>
+                    <div class="d-flex gap-3 text-muted small">
+                        <span><i class="fa-solid fa-bullseye me-1"></i>R²: {{ "%.4f"|format(active_model.r2_score) }}</span>
+                        <span><i class="fa-solid fa-ruler-combined me-1"></i>RMSE: {{ "%.4f"|format(active_model.rmse) }}</span>
+                        <span><i class="fa-regular fa-calendar me-1"></i>{{ active_model.training_date.strftime('%Y-%m-%d') }}</span>
+                    </div>
+                    {% else %}
+                    <p class="text-muted mb-0">No active model loaded.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Chart -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white border-0 pt-4 pb-0">
+                    <h5 class="fw-bold mb-0">Your Prediction Distribution</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="categoryChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Recent Predictions -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white border-0 pt-4 pb-0 d-flex justify-content-between align-items-center">
+                    <h5 class="fw-bold mb-0">Recent Activity</h5>
+                    <a href="{{ url_for('reports.history') }}" class="btn btn-sm btn-outline-primary rounded-pill">View All</a>
+                </div>
+                <div class="card-body">
+                    {% if recent_predictions %}
+                        <div class="list-group list-group-flush">
+                        {% for item in recent_predictions %}
+                            <div class="list-group-item px-0 py-3">
+                                <div class="d-flex w-100 justify-content-between align-items-center mb-1">
+                                    <h6 class="mb-0 fw-bold">{{ item.country }}</h6>
+                                    <small class="text-muted">{{ item.timestamp.strftime('%b %d') }}</small>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="small text-muted">Score: {{ "%.3f"|format(item.predicted_hdi) }}</span>
+                                    {% if item.predicted_category == 'Very High' %}
+                                        <span class="badge bg-success rounded-pill px-2 py-1">Very High</span>
+                                    {% elif item.predicted_category == 'High' %}
+                                        <span class="badge bg-primary rounded-pill px-2 py-1">High</span>
+                                    {% elif item.predicted_category == 'Medium' %}
+                                        <span class="badge bg-warning text-dark rounded-pill px-2 py-1">Medium</span>
+                                    {% else %}
+                                        <span class="badge bg-danger rounded-pill px-2 py-1">Low</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center text-muted py-5">
+                            <i class="fa-solid fa-folder-open fs-1 mb-3 opacity-50"></i>
+                            <p>No predictions yet.</p>
+                            <a href="{{ url_for('prediction.predict') }}" class="btn btn-primary btn-sm rounded-pill mt-2">Make a Prediction</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById('categoryChart');
+        if (ctx) {
+            const chartData = {{ chart_data|tojson }};
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        data: chartData.data,
+                        backgroundColor: [
+                            'rgba(25, 135, 84, 0.8)',  // Success
+                            'rgba(13, 110, 253, 0.8)', // Primary
+                            'rgba(255, 193, 7, 0.8)',  // Warning
+                            'rgba(220, 53, 69, 0.8)'   // Danger
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    },
+                    cutout: '70%'
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}
