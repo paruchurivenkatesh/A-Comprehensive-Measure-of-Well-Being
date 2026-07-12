@@ -48,10 +48,11 @@ The model evaluates development metrics across four key core categories:
 
 | Feature Dimension | Target Metric Description | Valid Ingestion Bounds | Target Data Type |
 | :--- | :--- | :--- | :--- |
-| **Country** | Name of the nation selected for regional parsing | Dropdown Menu Selection | string |
-| **Life Exp** | Life expectancy rate tracking healthcare longevity | 30.00 – 85.00 Years | float |
-| **Schooling** | Mean years of schooling completed by residents | 1.00 – 15.00 Years | float |
-| **GNI** | Gross National Income per capita (purchasing power) | $40.00 – $140,000.00 | float |
+| **Country Name** | Name of the nation selected for regional parsing | Dropdown Menu Selection | string |
+| **Life Expectancy(Years)** | Life expectancy rate tracking healthcare longevity | e.g., 82.4 Years| float |
+| **Mean Years of Schooling** | Mean years of schooling completed by residents | e.g., 12.6 Years | float |
+| **Expected Years of Schooling** | Expected years of schooling completed by residents | e.g., 18.1 Years | float |
+| **GNI per Capita($)** | Gross National Income per capita (purchasing power) | e.g., $66494 | float |
 
 ## ⚙️ Tech Stack
 | Layer | Component | Description |
